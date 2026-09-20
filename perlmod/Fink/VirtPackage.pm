@@ -1007,20 +1007,52 @@ as part of the Xcode tools.
 			MacOSX11.0.sdk
 			MacOSX11.1.sdk
 			MacOSX11.3.sdk
+			MacOSX12.0.sdk
+			MacOSX12.1.sdk
 		);
 	} elsif ($osxversion == 21) { # macOS 12
 		@SDKDIRS=qw(
 			MacOSX11.3.sdk
 			MacOSX12.0.sdk
+			MacOSX12.3.sdk
+			MacOSX13.0.sdk
+			MacOSX13.1.sdk
 		);
 	} elsif ($osxversion == 22) { # macOS 13
 		@SDKDIRS=qw(
 			MacOSX13.0.sdk
 			MacOSX13.1.sdk
+			MacOSX13.3.sdk
+			MacOSX14.0.sdk
+			MacOSX14.2.sdk
 		);
-	} elsif ($osxversion == 23) { # macOS 14
+	} elsif ($osxversion == 23) { # macOS 14 Sonoma
 		@SDKDIRS=qw(
 			MacOSX14.0.sdk
+			MacOSX14.4.sdk
+			MacOSX14.5.sdk
+			MacOSX15.0.sdk
+			MacOSX15.2.sdk
+		);
+	} elsif ($osxversion == 24) { # macOS 15 Sequoia
+		@SDKDIRS=qw(
+			MacOSX15.4.sdk
+			MacOSX15.5.sdk
+			MacOSX26.0.sdk
+			MacOSX26.2.sdk
+		);
+	} elsif ($osxversion == 25) { # macOS 26 Tahoe
+		@SDKDIRS=qw(
+			MacOSX26.0.sdk
+			MacOSX26.4.sdk
+			MacOSX26.5.sdk
+			MacOSX27.0.sdk
+			MacOSX27.2.sdk
+		);
+	} elsif ($osxversion == 27) { # macOS 27 Golden Gate
+		@SDKDIRS=qw(
+			MacOSX27.0.sdk
+			MacOSX27.2.sdk
 		);
 	}
 #   Portable SDK path finder which works on 10.5 and later
