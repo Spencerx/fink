@@ -253,6 +253,9 @@ GCC_MSG
 		# last macOS version that will support x86_64
 		&host_supported_if($2 =~ /^[0-5]$/);
 		$distribution = "26.0";
+	} elsif ($host =~ /^aarch64-apple-darwin27\.(\d+)\.\d+$/) {
+		&host_supported_if($1 =~ /^[0]$/);
+		$distribution = "27.0";
 	} else {
 		&print_breaking("This system is unrecognized and not ".
 			"supported by Fink.");
@@ -1104,6 +1107,7 @@ sub get_selfupdatetrees {
 		"14.4" => "10.9-libcxx",
 		"15.0" => "10.9-libcxx",
 		"26.0" => "10.9-libcxx",
+		"27.0" => "10.9-libcxx",
 		);
 
 	return $selfupdatetrees{$distribution};
