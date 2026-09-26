@@ -5,7 +5,7 @@
 #
 # Fink - a package manager that downloads source and installs it
 # Copyright (c) 2001 Christoph Pfisterer
-# Copyright (c) 2001-2013 The Fink Package Manager Team
+# Copyright (c) 2001-2026 The Fink Package Manager Team
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -287,7 +287,7 @@ sub setup_direct_svn {
 						 	die "Can't link file \"$_\" to \"$tempfinkdir/$rel\": $!\n";
 						 }
 					 } else {
-						 if (&execute("cp -p '$_' '$tempfinkdir/$rel'")) {
+						 if (&execute("/bin/cp -p '$_' '$tempfinkdir/$rel'")) {
 							 die "Can't copy file \"$tempfinkdir/$rel\": $!\n";
 						 }
 					 }

@@ -4,7 +4,7 @@
 #
 # Fink - a package manager that downloads source and installs it
 # Copyright (c) 2001 Christoph Pfisterer
-# Copyright (c) 2001-2019 The Fink Package Manager Team
+# Copyright (c) 2001-2026 The Fink Package Manager Team
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -34,12 +34,12 @@ basepath="$1"
 
 echo "Creating directories..."
 
-mkdir -p "$basepath"
-chmod 755 "$basepath"
+/bin/mkdir -p "$basepath"
+/bin/chmod 755 "$basepath"
 
 for dir in lib lib/fink lib/fink/mirror lib/fink/URL share share/doc share/doc/fink-mirrors  share/doc/fink ; do
-  mkdir "$basepath/$dir"
-  chmod 755 "$basepath/$dir"
+  /bin/mkdir "$basepath/$dir"
+  /bin/chmod 755 "$basepath/$dir"
 done
 
 
@@ -47,23 +47,23 @@ echo "Copying files..."
 
 for file in ChangeLog _keys _list apache apt cpan ctan debian freebsd gimp gnome gnu kde master postgresql rsync sourceforge; do
   if [ -f $file ]; then
-    install -c -p -m 644 $file "$basepath/lib/fink/mirror/"
+    /usr/bin/install -c -p -m 644 $file "$basepath/lib/fink/mirror/"
   fi
 done
 
 for file in _urls anonymous-cvs cvs-repository developer-cvs website; do
   if [ -f $file ]; then
-    install -c -p -m 644 $file "$basepath/lib/fink/URL/"
+    /usr/bin/install -c -p -m 644 $file "$basepath/lib/fink/URL/"
   fi
 done
 
-install -c -p -m 755 postinstall.pl "$basepath/lib/fink/mirror/"
+/usr/bin/install -c -p -m 755 postinstall.pl "$basepath/lib/fink/mirror/"
 
 for file in COPYING README README.contacts; do
-  install -c -p -m 644  $file "$basepath/share/doc/fink-mirrors/"
+  /usr/bin/install -c -p -m 644  $file "$basepath/share/doc/fink-mirrors/"
 done
 
-install -c -p -m 644  NEWS "$basepath/share/doc/fink/NEWS.mirror"
+/usr/bin/install -c -p -m 644  NEWS "$basepath/share/doc/fink/NEWS.mirror"
 
 echo "Done."
 exit 0

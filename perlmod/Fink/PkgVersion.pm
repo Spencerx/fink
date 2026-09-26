@@ -4462,7 +4462,7 @@ EOF
 			"  /usr/bin/install -d -m 755 /Applications/Fink\n".
 			"fi\n";
 		foreach (@apps) {
-			$scriptbody{postinst} .= "ln -s '%p/Applications/$_' /Applications/Fink/\n";
+			$scriptbody{postinst} .= "/bin/ln -s '%p/Applications/$_' /Applications/Fink/\n";
 		}
 
 		$scriptbody{postrm} .= "\n";

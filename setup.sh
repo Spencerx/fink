@@ -58,35 +58,35 @@ sed -e "s|@BASEPATH@|$basepath|g" -e "s|@PERLEXE@|$perlexe|g" < fink.in > fink
 
 for bin in fink-{virtual-pkgs,instscripts,scanpackages}; do
 	echo "Creating $bin..."
-	sed -e "s|@BASEPATH@|$basepath|g" -e "s|@LIBPATH@|\$basepath/lib/perl5|g" < "$bin.in" > "$bin"
+	/usr/bin/sed -e "s|@BASEPATH@|$basepath|g" -e "s|@LIBPATH@|\$basepath/lib/perl5|g" < "$bin.in" > "$bin"
 done
 
 echo "Creating pathsetup.sh..."
-sed "s|@PREFIX@|$basepath|g" <pathsetup.sh.in >pathsetup.sh
+/usr/bin/sed "s|@PREFIX@|$basepath|g" <pathsetup.sh.in >pathsetup.sh
 
 echo "Creating FinkVersion.pm..."
-sed -e "s|@VERSION@|$version|g" -e "s|@ARCHITECTURE@|$architecture|g" <perlmod/Fink/FinkVersion.pm.in >perlmod/Fink/FinkVersion.pm
+/usr/bin/sed -e "s|@VERSION@|$version|g" -e "s|@ARCHITECTURE@|$architecture|g" <perlmod/Fink/FinkVersion.pm.in >perlmod/Fink/FinkVersion.pm
 
 echo "Creating Fink.pm..."
-sed -e "s|@BASEPATH@|$basepath|g" <perlmod/Fink.pm.in >perlmod/Fink.pm
+/usr/bin/sed -e "s|@BASEPATH@|$basepath|g" <perlmod/Fink.pm.in >perlmod/Fink.pm
 
 echo "Creating man pages..."
-sed "s|@PREFIX@|$basepath|g" <fink.8.in \
+/usr/bin/sed "s|@PREFIX@|$basepath|g" <fink.8.in \
   | perl -MTime::Local -MPOSIX=strftime -p -e '$d="Date:";if (s/(\.Dd \$$d) (\d+)\/(\d+)\/(\d+) (\d+):(\d+):(\d+) \$/\1/) {$epochtime = timegm($7,$6,$5,$4,$3-1,$2-1900);$datestr = strftime "%B %e, %Y", localtime($epochtime); s/(\.Dd )\$$d/$1$datestr/;}' \
   >fink.8
 
-sed "s|@PREFIX@|$basepath|g" <fink.conf.5.in \
+/usr/bin/sed "s|@PREFIX@|$basepath|g" <fink.conf.5.in \
   | perl -MTime::Local -MPOSIX=strftime -p -e '$d="Date:";if (s/(\.Dd \$$d) (\d+)\/(\d+)\/(\d+) (\d+):(\d+):(\d+) \$/\1/) {$epochtime = timegm($7,$6,$5,$4,$3-1,$2-1900);$datestr = strftime "%B %e, %Y", localtime($epochtime); s/(\.Dd )\$$d/$1$datestr/;}' \
   >fink.conf.5
 
 echo "Creating shlibs default file..."
-sed "s|@PREFIX@|$basepath|g" <shlibs.default.in >shlibs.default
+/usr/bin/sed "s|@PREFIX@|$basepath|g" <shlibs.default.in >shlibs.default
 
 echo "Creating postinstall script..."
-sed "s|@PREFIX@|$basepath|g" <postinstall.pl.in >postinstall.pl
+/usr/bin/sed "s|@PREFIX@|$basepath|g" <postinstall.pl.in >postinstall.pl
 
 echo "Creating dpkg helper script..."
-sed "s|@PREFIX@|$basepath|g" <fink-dpkg-status-cleanup.in >fink-dpkg-status-cleanup
+/usr/bin/sed "s|@PREFIX@|$basepath|g" <fink-dpkg-status-cleanup.in >fink-dpkg-status-cleanup
 
 # note: because they are used at different times during bootstrapping,
 # it is important to NOT use the full path to the dpkg executable in
@@ -99,21 +99,21 @@ packargs='"qqiss", 0, 0'
 
 echo "Creating lockwait wrappers..."
 for prog in dpkg; do
-	sed -e "s|@PREFIX@|$basepath|g" -e "s|@PROG@|$prog|g" -e "s|@PACKARGS@|$packargs|" <lockwait.in >$prog-lockwait
+	/usr/bin/sed -e "s|@PREFIX@|$basepath|g" -e "s|@PROG@|$prog|g" -e "s|@PACKARGS@|$packargs|" <lockwait.in >$prog-lockwait
 done
 for prog in apt-get; do
-	sed -e "s|@PREFIX@|$basepath|g" -e "s|@PROG@|$basepath/bin/$prog|g" -e "s|@PACKARGS@|$packargs|" <lockwait.in >$prog-lockwait
+	/usr/bin/sed -e "s|@PREFIX@|$basepath|g" -e "s|@PROG@|$basepath/bin/$prog|g" -e "s|@PACKARGS@|$packargs|" <lockwait.in >$prog-lockwait
 done
 
 echo "Creating g++ wrappers..."
 for gccvers in 3.3 4.0; do
-	sed -e "s|@GCCVERS@|$gccvers|g" <g++-wrapper.in \
+	/usr/bin/sed -e "s|@GCCVERS@|$gccvers|g" <g++-wrapper.in \
 		>"g++-wrapper-$gccvers"
 done
 
 echo "Creating compiler wrapper"
-sed -e "s|@ARCHITECTURE@|$architecture|g" -e "s|@PREFIX@|$basepath|g" < compiler_wrapper-10.6.in >"compiler_wrapper"
-sed -e "s|@PREFIX@|$basepath|g" < compiler_wrapper-10.7.in >"compiler_wrapper-10.7"
-sed -e "s|@PREFIX@|$basepeath|g" < compiler_wrapper-10.9.in >"compiler_wrapper-10.9"
+/usr/bin/sed -e "s|@ARCHITECTURE@|$architecture|g" -e "s|@PREFIX@|$basepath|g" < compiler_wrapper-10.6.in >"compiler_wrapper"
+/usr/bin/sed -e "s|@PREFIX@|$basepath|g" < compiler_wrapper-10.7.in >"compiler_wrapper-10.7"
+/usr/bin/sed -e "s|@PREFIX@|$basepeath|g" < compiler_wrapper-10.9.in >"compiler_wrapper-10.9"
 
 exit 0

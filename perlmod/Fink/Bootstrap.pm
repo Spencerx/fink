@@ -802,7 +802,7 @@ sub create_tarball {
 
 	$script = "";
 	if (not -d "$bpath/src") {
-		$script .= "mkdir -p $bpath/src\n";
+		$script .= "/bin/mkdir -p $bpath/src\n";
 	}
 
 	# Don't allow Apple's tar to use copyfile
